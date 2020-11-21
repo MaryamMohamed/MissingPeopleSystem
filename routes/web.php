@@ -17,6 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::middleware('auth')->group(function(){
+    Route::get('/profiles/{user:username}/edit', 'App\Http\Controllers\ProfilesController@edit');
+    Route::patch('/profiles/{user:username}','App\Http\Controllers\ProfilesController@update');
+});
+
+Route::get('/profiles/{user:username}','App\Http\Controllers\ProfilesController@show')->name('profile');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

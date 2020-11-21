@@ -17,8 +17,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'username',
         'name',
+       // 'avatar',
         'email',
+        'phone',
         'password',
     ];
 
@@ -40,4 +43,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getAvatarAttribute($value)
+    {
+        return asset($value);
+    }
+
+    public function getRouteKeyName(){
+        return 'username';
+    }
+
+    public function path($append = '')
+    {
+        $path = url('profiles', $this->username);
+
+        return $append ? "{$path}/{$append}" : $path;
+    }
+
 }
