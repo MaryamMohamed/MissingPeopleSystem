@@ -40,6 +40,28 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        <?php if(Route::has('login')): ?>
+                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                    <?php if(auth()->guard()->check()): ?>
+                        <a href="<?php echo e(url('/report-founded')); ?>" class="ml-4 text-sm text-gray-700 underline">Report Founded One</a>
+                        <a href="<?php echo e(url('/report-missed')); ?>" class="ml-4 text-sm text-gray-700 underline">Report Missed One</a>
+                        <a href="<?php echo e(url('/profiles', auth()->user())); ?>" class="ml-4 text-sm text-gray-700 underline">Profiles</a>
+                        <a href="<?php echo e(url('/home')); ?>" class="ml-4 text-sm text-gray-700 underline">Home</a>
+                        
+                    <?php else: ?>
+                        <a href="<?php echo e(url('/report-founded')); ?>" class="ml-4 text-sm text-gray-700 underline">Report Founded One</a>
+                        <a href="<?php echo e(url('/report-missed')); ?>" class="ml-4 text-sm text-gray-700 underline">Report Missed One</a>
+
+                        <a href="<?php echo e(route('login')); ?>" class="ml-4 text-sm text-gray-700 underline">Login</a>
+
+                        <?php if(Route::has('register')): ?>
+                            <a href="<?php echo e(route('register')); ?>" class="ml-4 text-sm text-gray-700 underline">Register</a>
+                        <?php endif; ?>
+
+                        
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
                         <?php if(auth()->guard()->guest()): ?>
                             <?php if(Route::has('login')): ?>
                                 <li class="nav-item">
@@ -82,6 +104,7 @@
             <?php echo $__env->yieldContent('content'); ?>
         </main>
     </div>
+    
 </body>
 </html>
 <?php /**PATH E:\college\level.4\GP\GraduationProjectV1.1\MissingPeopleSystem\resources\views/layouts/app.blade.php ENDPATH**/ ?>

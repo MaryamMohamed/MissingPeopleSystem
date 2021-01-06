@@ -39,6 +39,28 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        @if (Route::has('login'))
+                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                    @auth
+                        <a href="{{ url('/report-founded') }}" class="ml-4 text-sm text-gray-700 underline">Report Founded One</a>
+                        <a href="{{ url('/report-missed') }}" class="ml-4 text-sm text-gray-700 underline">Report Missed One</a>
+                        <a href="{{ url('/profiles', auth()->user()) }}" class="ml-4 text-sm text-gray-700 underline">Profiles</a>
+                        <a href="{{ url('/home') }}" class="ml-4 text-sm text-gray-700 underline">Home</a>
+                        
+                    @else
+                        <a href="{{ url('/report-founded') }}" class="ml-4 text-sm text-gray-700 underline">Report Founded One</a>
+                        <a href="{{ url('/report-missed') }}" class="ml-4 text-sm text-gray-700 underline">Report Missed One</a>
+
+                        <a href="{{ route('login') }}" class="ml-4 text-sm text-gray-700 underline">Login</a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+                        @endif
+
+                        
+                    @endif
+                </div>
+            @endif
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -79,5 +101,6 @@
             @yield('content')
         </main>
     </div>
+    
 </body>
 </html>

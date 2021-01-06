@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><?php echo e(__('Dashboard')); ?></div>
+                <div class="card-header"><?php echo e(__('My Reports')); ?></div>
 
                 <div class="card-body">
                     <?php if(session('status')): ?>
@@ -13,7 +13,7 @@
                         </div>
                     <?php endif; ?>
 
-                    <?php echo e(__('Welcome To Home Page!')); ?> <?php echo e(Auth::user()->name); ?>
+                    <?php echo e(__('Here where all your reports ')); ?> <?php echo e(Auth::user()->name); ?>
 
                 </div>
             </div>

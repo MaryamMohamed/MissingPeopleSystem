@@ -9,6 +9,11 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    public function reportsFounded(Type $var = null)
+    {
+        # code...
+        return $this->hasMany('App\Models\ReportFounded');
+    }
     use HasFactory, Notifiable;
 
     /**

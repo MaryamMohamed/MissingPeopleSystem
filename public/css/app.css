@@ -10902,4 +10902,18 @@ a.text-dark:focus {
     border-color: #dee2e6;
   }
 }
+.error,
+.success{
+  text-align: center;
+}
+.error{
+  border: 1px solid red;
+  background-color: #f9b5af;
+  color: red;
+}
 
+.success{
+  border: 1px solid green;
+  background-color: #d1f9da;
+  color: green;
+}

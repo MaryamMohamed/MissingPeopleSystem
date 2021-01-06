@@ -13,16 +13,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Route::middleware('auth')->group(function(){
-    Route::get('/profiles/{user:username}/edit', 'App\Http\Controllers\ProfilesController@edit');
-    Route::patch('/profiles/{user:username}','App\Http\Controllers\ProfilesController@update');
+    Route::get('/profiles/{user:username}/edit', 'ProfilesController@edit');
+    Route::patch('/profiles/{user:username}','ProfilesController@update');
+    Route::post('/', 'ReportFoundedController@store')->name('welcome');
+    Route::get('/report-founded', 'ReportFoundedController@showFounded')->name('report.founded');
+    Route::get('/report-missed', 'ReportFoundedController@showMissed')->name('report.missed');
+    Route::get('/report-delete/{id}','ReportFoundedController@destroy')->name('report.delete');
+    Route::get('/report/{id}/edit','ReportFoundedController@edit')->name('report.edit');
+    Route::patch('/report/{id}','ReportFoundedController@update');
 });
 
-Route::get('/profiles/{user:username}','App\Http\Controllers\ProfilesController@show')->name('profile');
+
+Route::get('/profiles/{user:username}','ProfilesController@show')->name('profile');
+Route::get('/report/{id}','ReportFoundedController@getAReport')->name('report');
+
+Route::get('/','ReportFoundedController@getWelcome')->name('welcome');
 
 Auth::routes();
 
