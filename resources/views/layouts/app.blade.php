@@ -42,14 +42,18 @@
                         @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
-                        <a href="{{ url('/report-founded') }}" class="ml-4 text-sm text-gray-700 underline">Report Founded One</a>
-                        <a href="{{ url('/report-missed') }}" class="ml-4 text-sm text-gray-700 underline">Report Missed One</a>
+                        <a href="{{ url('/people-found') }}" class="ml-4 text-sm text-gray-700 underline">Al Founded Reports</a>
+                        <a href="{{ url('/missing-persons') }}" class="ml-4 text-sm text-gray-700 underline">All Missed Reports</a>
+                        <a href="{{ route('reports.create') }}" class="ml-4 text-sm text-gray-700 underline">Report Founded One</a>
+                        <a href="{{ url('/missing/create') }}" class="ml-4 text-sm text-gray-700 underline">Report Missed One</a>
                         <a href="{{ url('/profiles', auth()->user()) }}" class="ml-4 text-sm text-gray-700 underline">Profiles</a>
                         <a href="{{ url('/home') }}" class="ml-4 text-sm text-gray-700 underline">Home</a>
                         
                     @else
-                        <a href="{{ url('/report-founded') }}" class="ml-4 text-sm text-gray-700 underline">Report Founded One</a>
-                        <a href="{{ url('/report-missed') }}" class="ml-4 text-sm text-gray-700 underline">Report Missed One</a>
+                    <a href="{{ url('/people-found') }}" class="ml-4 text-sm text-gray-700 underline">Al Founded Reports</a>
+                        <a href="{{ url('/missing-persons') }}" class="ml-4 text-sm text-gray-700 underline">All Missed Reports</a>
+                        <a href="{{ route('reports.create') }}" class="ml-4 text-sm text-gray-700 underline">Report Founded One</a>
+                        <a href="{{ url('/missing/create') }}" class="ml-4 text-sm text-gray-700 underline">Report Missed One</a>
 
                         <a href="{{ route('login') }}" class="ml-4 text-sm text-gray-700 underline">Login</a>
 

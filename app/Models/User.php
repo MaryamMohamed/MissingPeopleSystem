@@ -14,6 +14,11 @@ class User extends Authenticatable
         # code...
         return $this->hasMany('App\Models\ReportFounded');
     }
+    public function report(Type $var = null)
+    {
+        # code...
+        return $this->hasMany('App\Models\Report');
+    }
     use HasFactory, Notifiable;
 
     /**

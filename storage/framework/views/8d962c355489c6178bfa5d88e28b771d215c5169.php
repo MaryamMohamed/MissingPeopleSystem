@@ -43,14 +43,18 @@
                         <?php if(Route::has('login')): ?>
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     <?php if(auth()->guard()->check()): ?>
-                        <a href="<?php echo e(url('/report-founded')); ?>" class="ml-4 text-sm text-gray-700 underline">Report Founded One</a>
-                        <a href="<?php echo e(url('/report-missed')); ?>" class="ml-4 text-sm text-gray-700 underline">Report Missed One</a>
+                        <a href="<?php echo e(url('/people-found')); ?>" class="ml-4 text-sm text-gray-700 underline">Al Founded Reports</a>
+                        <a href="<?php echo e(url('/missing-persons')); ?>" class="ml-4 text-sm text-gray-700 underline">All Missed Reports</a>
+                        <a href="<?php echo e(route('reports.create')); ?>" class="ml-4 text-sm text-gray-700 underline">Report Founded One</a>
+                        <a href="<?php echo e(url('/missing/create')); ?>" class="ml-4 text-sm text-gray-700 underline">Report Missed One</a>
                         <a href="<?php echo e(url('/profiles', auth()->user())); ?>" class="ml-4 text-sm text-gray-700 underline">Profiles</a>
                         <a href="<?php echo e(url('/home')); ?>" class="ml-4 text-sm text-gray-700 underline">Home</a>
                         
                     <?php else: ?>
-                        <a href="<?php echo e(url('/report-founded')); ?>" class="ml-4 text-sm text-gray-700 underline">Report Founded One</a>
-                        <a href="<?php echo e(url('/report-missed')); ?>" class="ml-4 text-sm text-gray-700 underline">Report Missed One</a>
+                    <a href="<?php echo e(url('/people-found')); ?>" class="ml-4 text-sm text-gray-700 underline">Al Founded Reports</a>
+                        <a href="<?php echo e(url('/missing-persons')); ?>" class="ml-4 text-sm text-gray-700 underline">All Missed Reports</a>
+                        <a href="<?php echo e(route('reports.create')); ?>" class="ml-4 text-sm text-gray-700 underline">Report Founded One</a>
+                        <a href="<?php echo e(url('/missing/create')); ?>" class="ml-4 text-sm text-gray-700 underline">Report Missed One</a>
 
                         <a href="<?php echo e(route('login')); ?>" class="ml-4 text-sm text-gray-700 underline">Login</a>
 
