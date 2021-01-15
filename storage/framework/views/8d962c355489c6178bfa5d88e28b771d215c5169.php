@@ -18,6 +18,8 @@
 
     <!-- Styles -->
     <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
+
+
 </head>
 <body>
     <div id="app">
@@ -108,7 +110,7 @@
             <?php echo $__env->yieldContent('content'); ?>
         </main>
     </div>
-    
+    <?php echo $__env->yieldPushContent('ajax_crud'); ?>
 </body>
 </html>
 <?php /**PATH E:\college\level.4\GP\GraduationProjectV1.1\MissingPeopleSystem\resources\views/layouts/app.blade.php ENDPATH**/ ?>

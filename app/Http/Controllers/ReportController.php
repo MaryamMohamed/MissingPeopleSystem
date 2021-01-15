@@ -16,15 +16,17 @@ class ReportController extends Controller
      */
     public function index()
     {
-        //
-        $reports = Report::all();
+        //orderBy('date_of_found', 'asc')->
+        //$reports = Report::all();
+        $reports = Report::sortable()->where('report_state', 'FOUNDED')->paginate(5);
         return view('reports.founded.index', compact('reports'));
     }
 
     public function indexMissed()
     {
         //
-        $reports = Report::all();
+        //$reports = Report::all();
+        $reports = Report::sortable()->where('report_state', 'MISSED')->paginate(5);
         return view('reports.missed.index', compact('reports'));
     }
 
@@ -281,4 +283,41 @@ class ReportController extends Controller
         $report->delete();
         return redirect()->route('reports.missed.index')->with(['message' => 'Your Report Has Been Deleted SUCCESSFULLY']);
     }
+
+    public function search(Request $request)
+    {
+        # code...
+        $name = $request['name'];
+        $date = $request['date_of_found'];
+        $age = $request['age'];
+        $reports = Report::sortable()->where('report_state', 'FOUNDED')->where('full_name', 'like', '%'.$name.'%')
+                        -> where('age', 'like', $age)
+                        -> where('date_of_found', 'like', $date)->paginate(5);
+        if($reports->isEmpty())
+        {
+            $message = "NO RESULTS";
+            return redirect()->route('reports.founded.index')->with(['message' => $message]);
+
+        }
+        return view('reports.founded.index', compact('reports') );
+    }
+
+    public function searchMissed(Request $request)
+    {
+        # code...
+        $name = $request['name'];
+        $date = $request['date_of_found'];
+        $age = $request['age'];
+        $reports = Report::sortable()->where('report_state', 'MISSED')->where('full_name', 'like', '%'.$name.'%')
+                        -> where('age', 'like', $age)
+                        -> where('date_of_found', 'like', '%'.$date.'%')->paginate(5);
+        if($reports->isEmpty())
+        {
+            $message = "NO RESULTS";
+            return redirect()->route('reports.missed.index')->with(['message' => $message]);
+
+        }
+        return view('reports.missed.index', compact('reports') );
+    }
 }
+

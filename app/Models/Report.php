@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 class Report extends Model
 {
@@ -19,4 +20,8 @@ class Report extends Model
 
         return $append ? "{$path}/{$append}" : $path;
     }
+
+    use Sortable;
+    protected $fillable = [ 'full_name', 'gander','age', 'date_of_found' ];
+    public $sortable = ['id', 'full_name', 'gander','age', 'created_at', 'date_of_found'];
 }

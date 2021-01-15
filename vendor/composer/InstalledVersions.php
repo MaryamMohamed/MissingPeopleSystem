@@ -14,12 +14,12 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '1.0.0+no-version-set',
-    'version' => '1.0.0.0',
+    'pretty_version' => 'dev-main',
+    'version' => 'dev-main',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
+    'reference' => '5272ab84059260855772512cfafc4af5decf9c37',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -442,6 +442,15 @@ private static $installed = array (
         0 => '*',
       ),
     ),
+    'kyslik/column-sortable' => 
+    array (
+      'pretty_version' => '6.4.0',
+      'version' => '6.4.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '9aef633bfe160c5a43d97e92e55983daa2696eb1',
+    ),
     'laravel/framework' => 
     array (
       'pretty_version' => 'v8.14.0',
@@ -453,12 +462,12 @@ private static $installed = array (
     ),
     'laravel/laravel' => 
     array (
-      'pretty_version' => '1.0.0+no-version-set',
-      'version' => '1.0.0.0',
+      'pretty_version' => 'dev-main',
+      'version' => 'dev-main',
       'aliases' => 
       array (
       ),
-      'reference' => NULL,
+      'reference' => '5272ab84059260855772512cfafc4af5decf9c37',
     ),
     'laravel/tinker' => 
     array (
