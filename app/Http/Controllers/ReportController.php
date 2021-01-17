@@ -288,8 +288,9 @@ class ReportController extends Controller
     {
         # code...
         $name = $request['name'];
-        $date = $request['date_of_found'];
+        $date = $request['date_of_found'];        
         $age = $request['age'];
+        
         $reports = Report::sortable()->where('report_state', 'FOUNDED')->where('full_name', 'like', '%'.$name.'%')
                         -> where('age', 'like', $age)
                         -> where('date_of_found', 'like', $date)->paginate(5);
@@ -308,9 +309,11 @@ class ReportController extends Controller
         $name = $request['name'];
         $date = $request['date_of_found'];
         $age = $request['age'];
+            
         $reports = Report::sortable()->where('report_state', 'MISSED')->where('full_name', 'like', '%'.$name.'%')
-                        -> where('age', 'like', $age)
-                        -> where('date_of_found', 'like', '%'.$date.'%')->paginate(5);
+                    -> where('age', 'like', $age)
+                    -> where('date_of_found', 'like', '%'.$date.'%')->paginate(5);
+    
         if($reports->isEmpty())
         {
             $message = "NO RESULTS";
