@@ -1,15 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card row justify-content-center">
-                <div class="card-header">{{ __('Edit Profile Page') }}</div>
 
-                <div class="card-body">
-                    
-                    <form method="POST" action="{{ $user->path() }}" enctype="multipart/form-data">
+<!-- ======= Contact Section ======= -->
+<section id="register" class="register section-bg">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>SEdit Profile Page</h2>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-4">
+            <div class="info d-flex flex-column justify-content-center" data-aos="fade-right">              
+                <div class="phone">
+                <h2>Welcome Back</h2>
+                <br>
+                <h4>Do you want to change your profile data?</h4>
+                </div>
+            </div>
+            </div>
+
+            <div class="col-lg-8 mt-5 mt-lg-0">
+
+            <form method="POST" action="{{ route('update',auth()->user()) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
 
@@ -40,20 +55,6 @@
                                 @enderror
                             </div>
                         </div>
-
-                        <!-- <div class="form-group row">
-                            <label for="avatar" class="col-md-4 col-form-label text-md-right">Avatar</label>
-
-                            <div class="col-md-6">
-                                <input id="avatar" type="file" class="form-control @error('avatar') is-invalid @enderror" name="avatar" value="{{ $user->avatar }}" required autocomplete="avatar" autofocus>
-
-                                @error('avatar')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div> -->
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
@@ -93,10 +94,13 @@
                         
                     </form>
 
-                </div>
             </div>
+
         </div>
-    </div>
-</div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+
     
 @endsection

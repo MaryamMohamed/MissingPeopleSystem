@@ -37,7 +37,7 @@ class LoginController extends Controller
         }
         else
         {
-            return 'home';
+            return route('mycases', Auth::user()->username);
         }
 
     }

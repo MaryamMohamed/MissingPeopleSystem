@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Report;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class ProfilesController extends Controller
 {
+    
     public function show(User $user)
     {
         return view('profiles.show', compact('user'));
@@ -33,6 +35,11 @@ class ProfilesController extends Controller
        // $attributes['avatar'] = request('avatar')->store('avatars');
         $user->update($attributes);
 
-        return redirect($user->path());
+        return redirect($user->pathh());
+    }
+
+    public function index(User $user)
+    {
+        
     }
 }

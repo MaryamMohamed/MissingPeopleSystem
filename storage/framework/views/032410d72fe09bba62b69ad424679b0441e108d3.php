@@ -1,15 +1,30 @@
 
 
 <?php $__env->startSection('content'); ?>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card row justify-content-center">
-                <div class="card-header"><?php echo e(__('Edit Profile Page')); ?></div>
 
-                <div class="card-body">
-                    
-                    <form method="POST" action="<?php echo e($user->path()); ?>" enctype="multipart/form-data">
+<!-- ======= Contact Section ======= -->
+<section id="register" class="register section-bg">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>SEdit Profile Page</h2>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-4">
+            <div class="info d-flex flex-column justify-content-center" data-aos="fade-right">              
+                <div class="phone">
+                <h2>Welcome Back</h2>
+                <br>
+                <h4>Do you want to change your profile data?</h4>
+                </div>
+            </div>
+            </div>
+
+            <div class="col-lg-8 mt-5 mt-lg-0">
+
+            <form method="POST" action="<?php echo e(route('update',auth()->user())); ?>" enctype="multipart/form-data">
                         <?php echo csrf_field(); ?>
                         <?php echo method_field('PATCH'); ?>
 
@@ -68,34 +83,6 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
-
-                        <!-- <div class="form-group row">
-                            <label for="avatar" class="col-md-4 col-form-label text-md-right">Avatar</label>
-
-                            <div class="col-md-6">
-                                <input id="avatar" type="file" class="form-control <?php $__errorArgs = ['avatar'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" name="avatar" value="<?php echo e($user->avatar); ?>" required autocomplete="avatar" autofocus>
-
-                                <?php $__errorArgs = ['avatar'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong><?php echo e($message); ?></strong>
-                                    </span>
-                                <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                            </div>
-                        </div> -->
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
@@ -164,11 +151,14 @@ unset($__errorArgs, $__bag); ?>
                         
                     </form>
 
-                </div>
             </div>
+
         </div>
-    </div>
-</div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+
     
 <?php $__env->stopSection(); ?>
 

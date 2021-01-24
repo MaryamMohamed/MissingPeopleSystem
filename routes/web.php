@@ -18,19 +18,28 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function(){
-    Route::get('/profiles/{user:username}/edit', 'ProfilesController@edit');
-    Route::patch('/profiles/{user:username}','ProfilesController@update');
+    Route::get('/{user:username}-profile','ProfilesController@show')->name('profile'); // to shoe and edit my profile
+    Route::get('/{user:username}-edit', 'ProfilesController@edit')->name('edit');
+    Route::patch('/{user:username}-profile','ProfilesController@update')->name('update');
+    Route::get('/{user:username}-cases','ReportController@myCases')->name('mycases');
     Route::resource('reports', 'ReportController');
     Route::get('/people-found', 'ReportController@index')->name('reports.founded.index');
     Route::get('/missing-persons', 'ReportController@indexMissed')->name('reports.missed.index');
-    Route::get('/missing/create', 'ReportController@createMissed')->name('reports.missed.create');
+    Route::get('/create-found-one', 'ReportController@create')->name('reports.found.create');
+    Route::get('/create-new-found-one', 'ReportController@createNewF')->name('reports.found.createnew');
+    Route::get('/create-new-missed-one', 'ReportController@createNewM')->name('reports.missed.createnew');
+    Route::get('/create-missing-one', 'ReportController@createMissed')->name('reports.missed.create');
+    Route::post('/results', 'ReportController@showSimilar')->name('reports.similar');
     Route::post('/missing-persons', 'ReportController@storeMissed')->name('reports.missed.store');
-    Route::get('/missing/{id}/edit', 'ReportController@editMissed')->name('reports.missed.edit');
+    Route::get('/{id}_edit', 'ReportController@edit')->name('reports.edit');
+    Route::get('/{id}_editmissed', 'ReportController@editMissed')->name('reports.missed.edit');
     Route::put('/missing/{id}', 'ReportController@updateMissed')->name('reports.missed.update');
     Route::delete('/missing/{id}', 'ReportController@destroyMissed')->name('reports.missed.destroy');
-    Route::get('/people-found/search','ReportController@search');
-    Route::get('/missing-persons/search','ReportController@searchMissed');
-
+    Route::get('/search','ReportController@searchall');
+    Route::get('/people-found-search','ReportController@search');
+    Route::get('/missing-persons-search','ReportController@searchMissed');
+    Route::get('/{id}-show','ReportController@show')->name('report.show');
+    //Route::get('/results','ReportController@showSimilar')->name('report.results');    
 });
 
 
@@ -52,11 +61,18 @@ Route::group(['middleware'  => ['auth','admin']], function() {
 });
 
 
-Route::get('/profiles/{user:username}','ProfilesController@show')->name('profile');
+//Route::get('/{user:username}','ProfilesController@show')->middleware(['auth']); //for my profile & edit profile
+Route::get('/profiles/{user:username}','ProfilesController@show'); //for log in & sign up & home page
+Route::get('/{id}-show','ReportController@show')->name('report.show'); 
 Route::get('/people-found', 'ReportController@index')->name('reports.founded.index');
 Route::get('/missing-persons', 'ReportController@indexMissed')->name('reports.missed.index');
-Route::get('/people-found/search','ReportController@search');
-Route::get('/missing-persons/search','ReportController@searchMissed');
+Route::get('/search','ReportController@searchall');
+Route::get('/people-found-search','ReportController@search');
+Route::get('/missing-persons-search','ReportController@searchMissed');
 Auth::routes();
 
+
+Route::get('/','ReportController@indexall'); 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//////////////////

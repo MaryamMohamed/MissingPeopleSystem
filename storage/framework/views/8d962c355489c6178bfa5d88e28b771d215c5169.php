@@ -1,116 +1,177 @@
-<!doctype html>
-<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+  <!-- CSRF Token -->
+  <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title><?php echo e(config('app.name', 'Laravel')); ?></title>
+  <title>Knight Bootstrap Template - Index</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
-    <!-- Scripts -->
-    <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-    <!-- Styles -->
-    <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
 
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
 
+  <!-- =======================================================
+  * Template Name: Knight - v2.2.0
+  * Template URL: https://bootstrapmade.com/knight-free-bootstrap-theme/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
+
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
-                    <?php echo e(config('app.name', 'Laravel')); ?>
 
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php echo e(__('Toggle navigation')); ?>">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center">
+    <div class="container">
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+      <!-- The main logo is shown in mobile version only. The centered nav-logo in nav menu is displayed in desktop view  -->
+      <div class="logo d-block d-lg-none">
+        <a href="<?php echo e(url('/')); ?>"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+      </div>
 
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        <?php if(Route::has('login')): ?>
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    <?php if(auth()->guard()->check()): ?>
-                        <a href="<?php echo e(url('/people-found')); ?>" class="ml-4 text-sm text-gray-700 underline">Al Founded Reports</a>
-                        <a href="<?php echo e(url('/missing-persons')); ?>" class="ml-4 text-sm text-gray-700 underline">All Missed Reports</a>
-                        <a href="<?php echo e(route('reports.create')); ?>" class="ml-4 text-sm text-gray-700 underline">Report Founded One</a>
-                        <a href="<?php echo e(url('/missing/create')); ?>" class="ml-4 text-sm text-gray-700 underline">Report Missed One</a>
-                        <a href="<?php echo e(url('/profiles', auth()->user())); ?>" class="ml-4 text-sm text-gray-700 underline">Profiles</a>
-                        <a href="<?php echo e(url('/home')); ?>" class="ml-4 text-sm text-gray-700 underline">Home</a>
-                        
+      <nav class="nav-menu d-none d-lg-block">
+        <ul class="nav-inner">
+                    <!-- Authentication Links -->
+                    <?php if(Route::has('login')): ?>
+                <?php if(auth()->guard()->check()): ?>
+                    <li class="active"><a href="<?php echo e(url('/')); ?>">Home</a></li>
+                    <li class="drop-down"><a href="">About</a>
+                        <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#team">Our Team</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li class="drop-down"><a href="#portfolio">People</a>
+                        <ul>
+                        <li><a href="<?php echo e(url('/people-found')); ?>">Al Founded Reports</a></li>
+                        <li><a href="<?php echo e(url('/missing-persons')); ?>">All Missed Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="drop-down"><a href="">Make Report</a>
+                        <ul>
+                        <li><a href="<?php echo e(url('/create-found-one')); ?>">Report Founded One</a></li>
+                        <li><a href="<?php echo e(url('/create-missing-one')); ?>">Report Missed One</a></li>
+                        </ul>
+                    </li>
+                    
                     <?php else: ?>
-                    <a href="<?php echo e(url('/people-found')); ?>" class="ml-4 text-sm text-gray-700 underline">Al Founded Reports</a>
-                        <a href="<?php echo e(url('/missing-persons')); ?>" class="ml-4 text-sm text-gray-700 underline">All Missed Reports</a>
-                        <a href="<?php echo e(route('reports.create')); ?>" class="ml-4 text-sm text-gray-700 underline">Report Founded One</a>
-                        <a href="<?php echo e(url('/missing/create')); ?>" class="ml-4 text-sm text-gray-700 underline">Report Missed One</a>
+                        <li class="active"><a href="<?php echo e(url('/')); ?>">Home</a></li>
+                        <li class="drop-down"><a href="">About</a>
+                            <ul>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#team">Our Team</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li class="drop-down"><a href="#portfolio">People</a>
+                            <ul>
+                            <li><a href="<?php echo e(url('/people-found')); ?>">Al Founded Reports</a></li>
+                            <li><a href="<?php echo e(url('/missing-persons')); ?>">All Missed Reports</a></li>
+                            </ul>
+                        </li>
+                        <li class="drop-down"><a href="">Make A Report</a>
+                            <ul>
+                            <li><a href="<?php echo e(url('/create-found-one')); ?>">Report Founded One</a></li>
+                            <li><a href="<?php echo e(url('/create-missing-one')); ?>">Report Missed One</a></li>
+                            </ul>
+                        </li>
+                        <a href="<?php echo e(route('login')); ?>">Login</a>
 
-                        <a href="<?php echo e(route('login')); ?>" class="ml-4 text-sm text-gray-700 underline">Login</a>
-
-                        <?php if(Route::has('register')): ?>
-                            <a href="<?php echo e(route('register')); ?>" class="ml-4 text-sm text-gray-700 underline">Register</a>
-                        <?php endif; ?>
-
-                        
+                    <?php if(Route::has('register')): ?>
+                        <a href="<?php echo e(route('register')); ?>">Register</a>
                     <?php endif; ?>
-                </div>
+            
+                <?php endif; ?>
             <?php endif; ?>
-                        <?php if(auth()->guard()->guest()): ?>
-                            <?php if(Route::has('login')): ?>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo e(route('login')); ?>"><?php echo e(__('Login')); ?></a>
-                                </li>
-                            <?php endif; ?>
-                            
-                            <?php if(Route::has('register')): ?>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo e(route('register')); ?>"><?php echo e(__('Register')); ?></a>
-                                </li>
-                            <?php endif; ?>
-                        <?php else: ?>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <?php echo e(Auth::user()->name); ?>
 
-                                </a>
+            <?php if(auth()->guard()->guest()): ?>
+                
+                <?php else: ?>
+                    <li class="drop-down"><a href=""><?php echo e(Auth::user()->name); ?></a>
+                        <ul>
+                            <a href="<?php echo e(route('profile',auth()->user())); ?>">My Profile</a>
+                            <a href="<?php echo e(route('mycases',auth()->user())); ?>">My Cases</a>
+                            <a class="dropdown-item" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                <?php echo e(__('Logout')); ?>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        <?php echo e(__('Logout')); ?>
+                            </a>
+                        
+                            <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
+                                <?php echo csrf_field(); ?>
+                            </form>
+                        </ul>
+                    </li>
+            <?php endif; ?>
+        </ul>
+      </nav><!-- .nav-menu -->
 
-                                    </a>
-
-                                    <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
-                                        <?php echo csrf_field(); ?>
-                                    </form>
-                                </div>
-                            </li>
-                        <?php endif; ?>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <main class="py-4">
-            <?php echo $__env->yieldContent('content'); ?>
-        </main>
     </div>
-    <?php echo $__env->yieldPushContent('ajax_crud'); ?>
+  </header><!-- End Header -->
+
+  <main id="main">
+    <?php echo $__env->yieldContent('content'); ?>
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="footer-bottom">
+
+      <div class="container">
+
+
+        <div class="social-links">
+          <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+          <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+          <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+          <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+          <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        </div>
+
+      </div>
+    </div>
+
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/jquery-sticky/jquery.sticky.js"></script>
+  <script src="assets/vendor/venobox/venobox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
 </body>
+
 </html>
 <?php /**PATH E:\college\level.4\GP\GraduationProjectV1.1\MissingPeopleSystem\resources\views/layouts/app.blade.php ENDPATH**/ ?>

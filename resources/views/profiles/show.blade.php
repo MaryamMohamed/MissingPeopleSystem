@@ -1,49 +1,56 @@
 @extends('layouts.app')
-
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Profile Page') }}</div>
 
-                <div class="card-body">
-                    
-
-                    <div class="flex justify-between items-center">
-                    @if (Route::has('login'))
-
-                        @auth
-                        <!-- <td>
-                            <img src="{{$user->avatar}}" width="200" height="200" />
-                        </td> -->
-                        
-                        <div>
-                            <h2 class="font-bold text-2xl mb-2"> {{ $user->name}} </h2>
-                            <p class="text-sm"> Since: {{ $user->created_at->diffForHumans() }} </p>
-                            <p class="text-sm"> E-mail: {{ $user->email }} </p>
-                            <p class="text-sm"> Phone Number: 0{{ $user->phone }} </p>
-                        </div>
-                        @if (auth()->user()->is($user))
-                        <div>                            
-                            <a href="{{ $user->path('edit') }}" class="rounded-lg shadow py-2 px-3 text-black"> Edit Profile </a>                           
-                        </div>
-                        @endif
-                        @else
-                        <div>
-                            <h2 class="font-bold text-2xl mb-2"> {{ $user->name}} </h2>
-                            <p class="text-sm"> Since: {{ $user->created_at->diffForHumans() }} </p>
-                            <p class="text-sm"> E-mail: {{ $user->email }} </p>
-                            <p class="text-sm"> Phone Number: {{ $user->phone }} </p>
-                        </div>
-                        @endif
-                    @endif
-                    </div>
-
-                </div>
-            </div>
-        </div>
+    <!-- ======= Testimonials Section ======= -->
+    <div class="section-title " data-aos="fade-up">
+        <h2></h2>
     </div>
-</div>
+    @if (auth()->user()->is($user))
+      <div class="section-title " data-aos="fade-up">
+          <h2>My Profile</h2>
+      </div>
     
+    @else
+      <div class="section-title " data-aos="fade-up">
+          <h2>Profile</h2>
+      </div>
+    @endif
+    <section id="testimonials" class="testimonials">
+      <div class="container" data-aos="zoom-in">
+      
+
+        <div>
+          <div class="testimonial-item">
+            @if (Route::has('login'))
+                @auth
+                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+                <!-- <td>
+                    <img src="{{$user->avatar}}" width="200" height="200" />
+                </td> -->
+                <div>
+                    <h3> {{ $user->name}} </h3>
+                    <h5> Since: {{ $user->created_at->diffForHumans() }} </h5>
+                    <h5> E-mail: {{ $user->email }} </h5>
+                    <h5> Phone Number: 0{{ $user->phone }} </h5>
+                </div>
+                @if (auth()->user()->is($user))
+                <div>                            
+                    <a href="{{route('edit',auth()->user())}}" class="rounded-lg shadow py-2 px-3 text-black"> Edit Profile </a>                           
+                </div>
+                @endif
+                @else
+                <div>
+                    <h3> {{ $user->name}} </h3>
+                    <h5> Since: {{ $user->created_at->diffForHumans() }} </h5>
+                    <h5> E-mail: {{ $user->email }} </h5>
+                    <h5> Phone Number: {{ $user->phone }} </h5>
+                </div>
+                @endif
+            @endif
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
+
 @endsection

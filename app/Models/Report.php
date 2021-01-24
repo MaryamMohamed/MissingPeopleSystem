@@ -16,7 +16,7 @@ class Report extends Model
     }
     public function path($append = '')
     {
-        $path = url('report', $this->id);
+        $path = url('', $this->id);
 
         return $append ? "{$path}/{$append}" : $path;
     }

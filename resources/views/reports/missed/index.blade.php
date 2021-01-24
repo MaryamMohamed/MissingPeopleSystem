@@ -2,85 +2,86 @@
 
 @section('content')
 @include('layouts.message-block')
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!-- ======= Portfolio Section ======= -->
+<section id="portfolio" class="portfolio">
+      <div class="container">
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-        <div class="row">
-            <form action="/missing-persons/search" method="get">
-                <div class="input-group row">
-                        <div class="form-group col">
-                            <label for="full_name" class="">{{ __('name') }}</label>
-                            <input type="search" name="name" class="form-control">                
-                        </div>
-                        
-                        <div class="form-group col">
-                            <label for="age" class="">{{ __('age') }}</label>
-                            <input type="search" name="age" class="form-control">                
-                        </div>
-                        <div class="form-group col">
-                            <label for="date_of_found" class="">{{ __('date of found') }}</label>
-                            <input type="search" name="date_of_found" class="form-control">                
-                        </div>
-                        <span class="input-group-prepend">
-                            <button type="submit" class="btn btn-primary">search</button>
-                        </span>
-                </div>
-            </form>
-        </div>
-        <a href="{{ route('reports.missed.create') }}" class="btn btn-primary">Add New</a>
-        <div class="card">
-            <div class="card-header">
-                <h4 class="title">All Missing Person Reports</h4>
-            </div>
-            <div class="card-content table-responsive">
-                <table id="table" class="table"  cellspacing="0" width="100%">
-                    <thead class="text-primary">
-                    <th>NO.</th>
-                    <th>@sortablelink('full_name')</th>
-                    <th>@sortablelink('age')</th>
-                    <th>@sortablelink('gander')</th>
-                    <th>@sortablelink('date_of_found')</th>
-                    <th>state</th>
-                    <th>Action</th>
-                    </thead>
-                    <tbody>
-                        @foreach($reports as $key=>$report)
-                            <tr>
-                                <td>{{ $key + 1 }}</td>
-                                <td>{{ $report->full_name }}</td>
-                                <td>{{ $report->age }}</td>
-                                <td>{{ $report->gander }}</td>
-                                <td>{{ $report->date_of_found }}</td>
-                                <td>{{ $report->report_state }}</td>
-                                @if(Auth::user() == $report->user)
-                                <td>
-                                    <a href="{{ route('reports.missed.edit',$report->id) }}" class="btn btn-info btn-sm"><i class="material-icons">Edit</i></a>
-
-                                    <form id="delete-form-{{ $report->id }}" action="{{ route('reports.missed.destroy',$report->id) }}" style="display: none;" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form>
-                                    <button type="button" class="btn btn-danger btn-sm" onclick="if(confirm('Are you sure? You want to delete this?')){
-                                        event.preventDefault();
-                                        document.getElementById('delete-form-{{ $report->id }}').submit();
-                                    }else {
-                                        event.preventDefault();
-                                            }"><i class="material-icons">delete</i></button>
-                                </td>
-                                @endif
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+        <div class="section-title" data-aos="fade-up">
+          <h2>Missing People</h2>
         </div>
 
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters">
+                <form action="/missing-persons-search" method="get">
+                    <div class="input-group row">
+                            <div class="form-group col">
+                                <input type="search" name="name" class="form-control" placeholder="name">                
+                            </div>
+                            
+                            <div class="form-group col">
+                                <input type="search" name="age" class="form-control" placeholder="age">
+                            </div>
+                            <div class="form-group col">
+                                <input type="search" name="date_of_found" class="form-control" placeholder="date of found">
+                            </div>
+                            <span class="input-group-prepend">
+                                <button type="submit" class="btn">search</button>
+                            </span>
+                    </div>
+                </form>
+                <h4> Sort By </h4>
+                <li data-filter="*">@sortablelink('full_name')</li>
+                <li data-filter="*">@sortablelink('age')</li>
+                <li data-filter="*">@sortablelink('gander')</li>
+                <li data-filter="*">@sortablelink('date_of_found')</li>
+                 
+            </ul>
+          </div>
+        </div>
         
-            
-        </div>
-    </div>
-</div>
+        <br/>
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+                
+                @foreach($reports as $key=>$report)<div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                    <div class="portfolio-wrap">
+                        <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>{{ $report->full_name }}</h4>
+                            <p>{{ $report->accident }}</p>
+                            <div class="portfolio-links">
+                            <a href="assets/img/team/team-3.jpg" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a>
+                            <a href="{{route('report.show',$report->id)}}" title="More Details"><i class="bx bx-link"></i></a>
+                            </div>
+                            @if(Auth::user() == $report->user)
+                                <a href="{{  route('reports.missed.edit',$report->id)  }}" class="btn btn-success"><i class="material-icons">Edit</i></a>
+                                <br/>
 
+                                <form id="delete-form-{{ $report->id }}" action="{{ route('reports.missed.destroy',$report->id) }}" style="display: none;" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
+
+                                <button type="button" class="btn btn-danger btn-sm" onclick="if(confirm('Are you sure? You want to delete this?')){
+                                    event.preventDefault();
+                                    document.getElementById('delete-form-{{ $report->id }}').submit();
+                                }else {
+                                    event.preventDefault();
+                                        }"><i class="material-icons">delete</i></button>
+                            @endif
+                        </div>
+                        </div>
+                    </div>
+                        
+                @endforeach
+                @if($reports->isEmpty())
+                <h4>{{ $message }}</h4>
+                @endif
+
+        </div>
+        <div class="row portfolio-container" data-aos-delay="200"><h4> {!! $reports->appends(\Request::except('page'))->render() !!} </h4></div>
+        <h4></br></h4>
+        <h4></br></h4>
+      </div>
+    </section><!-- End Portfolio Section -->
 @endsection
