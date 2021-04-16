@@ -23,26 +23,24 @@ class ReportController extends Controller
      */
     public function indexall()
     {
-        //orderBy('date_of_found', 'asc')->
-        //$reports = Report::all();
+        $message = "No Repoerts to view";
         $reports = Report::sortable()->paginate(9);
-        return view('welcome', compact('reports'));
+        return view('welcome', compact('reports'))->with(['message' => $message]);
     }
 
     public function index()
     {
-        //orderBy('date_of_found', 'asc')->
-        //$reports = Report::all();
+        $message = "No Repoerts to view";
         $reports = Report::sortable()->where('report_state', 'FOUNDED')->paginate(9);
-        return view('reports.founded.index', compact('reports'));
+        return view('reports.founded.index', compact('reports'))->with(['message' => $message]);
     }
 
     public function indexMissed()
     {
         //
-        //$reports = Report::all();
+        $message = "No Repoerts to view";
         $reports = Report::sortable()->where('report_state', 'MISSED')->paginate(9);
-        return view('reports.missed.index', compact('reports'));
+        return view('reports.missed.index', compact('reports'))->with(['message' => $message]);
     }
 
     /**
@@ -77,10 +75,11 @@ class ReportController extends Controller
             'country' => 'required',
             'street' => 'required',
             'accident' => 'required|min:50',
-            'report_state' => 'required'
+            'report_state' => 'required',
+            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]
         );
-
+        
         $report = new Report();
         $report ->full_name = $request['full_name'];
         $report ->father_name = $request['father_name'];
@@ -92,17 +91,24 @@ class ReportController extends Controller
         $report ->hair_color = $request['hair_color'];
         $report ->length = $request['length'];
         $report ->special_characterstics = $request['special_characterstics'];
-        //$report ->photo = $request['photo'];
         $report ->date_of_found = $request['date_of_found'];
         $report ->country = $request['country'];
         $report ->street = $request['street'];
         $report ->accident = $request['accident'];
         $report ->report_state = $request['report_state'];
 
-        $request->user()->report()->save($report);
-        $message = "Your Report Has Been Sent SUCCESSFULLY";
-        return redirect()->route('reports.founded.index')->with(['message' => $message]);       
+        if ($files = $request->file('photo')) {
+            $destinationPath = 'images/'; // upload path
+            $reportImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
+            $files->move($destinationPath, $reportImage);
+        }
+        $report ->photo = $reportImage;
 
+        if ($request->user()->report()->save($report)){
+            $message = "Your Report Has Been Sent SUCCESSFULLY";
+        }
+
+        return redirect()->route('reports.missed.index')->with(['message' => $message]);  
     }
 
     public function createNewF()
@@ -126,9 +132,11 @@ class ReportController extends Controller
             'country' => 'required',
             'street' => 'required',
             'accident' => 'required|min:50',
-            'report_state' => 'required'
+            'report_state' => 'required',
+            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]
         );
+ 
         $report = new Report();
         $report ->full_name = $request['full_name'];
         $report ->father_name = $request['father_name'];
@@ -140,12 +148,17 @@ class ReportController extends Controller
         $report ->hair_color = $request['hair_color'];
         $report ->length = $request['length'];
         $report ->special_characterstics = $request['special_characterstics'];
-        //$report ->photo = $request['photo'];
         $report ->date_of_found = $request['date_of_found'];
         $report ->country = $request['country'];
         $report ->street = $request['street'];
         $report ->accident = $request['accident'];
         $report ->report_state = $request['report_state'];
+        if ($files = $request->file('photo')) {
+            $destinationPath = 'images/'; // upload path
+            $reportImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
+            $files->move($destinationPath, $reportImage);
+        }
+        $report ->photo = $reportImage;
 
         if ($request->user()->report()->save($report)){
             $message = "Your Report Has Been Sent SUCCESSFULLY";
@@ -166,14 +179,11 @@ class ReportController extends Controller
         $gander = $request['gander'];        
         $age = $request['age'];
         
-        $reports = Report::sortable()/*->where('report_state', 'FOUNDED')*/->where('full_name', 'like', $name)
+        $reports = Report::sortable()->where('full_name', 'like', $name)
                         -> where('age', 'like', $age)
                         -> where('gander', 'like', $gander)->paginate(9);
 
         if ($reports->isEmpty()){
-            //$message = "No Results";
-            //return redirect()->route('reports.results')->with(['message' => $message]);
-            //return view('reports.results')->with(['message' => $message]);
             return $this->store($request);
             
         }
@@ -189,11 +199,8 @@ class ReportController extends Controller
      */
     public function show($id)
     {
-        //
-        
+        //        
         $report = Report::with(['user'])->find($id);
-        //$auther = Report::find($id)->user_id;
-        
         return view('reports.index', compact('report'));
     }
 
@@ -255,12 +262,18 @@ class ReportController extends Controller
         $report ->hair_color = $request['hair_color'];
         $report ->length = $request['length'];
         $report ->special_characterstics = $request['special_characterstics'];
-        //$report ->photo = $request['photo'];
         $report ->date_of_found = $request['date_of_found'];
         $report ->country = $request['country'];
         $report ->street = $request['street'];
         $report ->accident = $request['accident'];
         $report ->report_state = $request['report_state'];
+
+        if ($files = $request->file('photo')) {
+            $destinationPath = 'images/'; // upload path
+            $reportImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
+            $files->move($destinationPath, $reportImage);
+        }
+        $report ->photo = $reportImage;
 
         if(Auth::user() == $report->user){
         
@@ -296,13 +309,19 @@ class ReportController extends Controller
         $report ->hair_color = $request['hair_color'];
         $report ->length = $request['length'];
         $report ->special_characterstics = $request['special_characterstics'];
-        //$report ->photo = $request['photo'];
         $report ->date_of_found = $request['date_of_found'];
         $report ->country = $request['country'];
         $report ->street = $request['street'];
         $report ->accident = $request['accident'];
         $report ->report_state = $request['report_state'];
 
+        if ($files = $request->file('photo')) {
+            $destinationPath = 'images/'; // upload path
+            $reportImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
+            $files->move($destinationPath, $reportImage);
+        }
+        $report ->photo = $reportImage;
+        
         if(Auth::user() == $report->user){
         
         

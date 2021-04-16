@@ -197,6 +197,14 @@
                             <textarea id="special_characterstics" type="text" class="form-control" name="special_characterstics" value="" style="margin-top: 0px; margin-bottom: 0px; height: 100px;">{{  $report->special_characterstics }}</textarea>
                         </div>
                     </div>
+                    
+                    <div class="form-group row">
+                        <label for="photo" class="col-md-4 col-form-label text-md-right">{{ __('Person Picture') }}</label>
+
+                        <div class="col-md-6">
+                            <input type="file" id="photo" name="photo">
+                        </div>
+                    </div>
                     <hr/>
 
                     <div class="form-group row">

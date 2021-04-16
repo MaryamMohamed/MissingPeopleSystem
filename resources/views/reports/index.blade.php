@@ -24,7 +24,7 @@
         <div class="portfolio-details-container">
 
           <div class="owl-carousel portfolio-details-carousel">
-            <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
+            <img src="{{ 'images/' . $report->photo }}" class="img-fluid" alt="">
           </div>
 
           <div class="portfolio-info">

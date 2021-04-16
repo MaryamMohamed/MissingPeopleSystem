@@ -22,6 +22,7 @@ class Report extends Model
     }
 
     use Sortable;
+    protected $table = "reports";
     protected $fillable = [ 'full_name', 'gander','age', 'date_of_found' ];
     public $sortable = ['id', 'full_name', 'gander','age', 'created_at', 'date_of_found'];
 }

@@ -220,14 +220,31 @@
                 @foreach($reports as $key=>$report)<div class="col-lg-4 col-md-6 portfolio-item filter-app">
                
                     <div class="portfolio-wrap">
-                        <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
+                        <img src="{{ 'images/' . $report->photo }}" class="img-fluid"/>
+                        
                         <div class="portfolio-info">
                             <h4>{{ $report->full_name }}</h4>
                             <p>{{ $report->accident }}</p>
                             <div class="portfolio-links">
-                            <a href="assets/img/team/team-4.jpg" data-gall="portfolioGallery" class="venobox" title="{{ $report->full_name }}"><i class="bx bx-plus"></i></a>
+                            <a href="{{ 'images/' . $report->photo }}" data-gall="portfolioGallery" class="venobox" title="{{ $report->full_name }}"><i class="bx bx-plus"></i></a>
                             <a href="{{  route('report.show',$report->id) }}" title="More Details"><i class="bx bx-link"></i></a>
                             </div>
+                            @if(Auth::user() == $report->user)
+                                <a href="{{  route('reports.edit',$report->id) }}" class="btn btn-success"><i class="material-icons">Edit</i></a>
+                                <br/>
+
+                                <form id="delete-form-{{ $report->id }}" action="{{ route('reports.destroy',$report->id) }}" style="display: none;" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
+
+                                <button type="button" class="btn btn-danger btn-sm" onclick="if(confirm('Are you sure? You want to delete this?')){
+                                    event.preventDefault();
+                                    document.getElementById('delete-form-{{ $report->id }}').submit();
+                                }else {
+                                    event.preventDefault();
+                                        }"><i class="material-icons">delete</i></button>
+                            @endif
                         </div>
                         </div>
                     </div>

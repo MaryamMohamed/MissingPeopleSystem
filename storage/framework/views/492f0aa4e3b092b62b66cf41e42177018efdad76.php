@@ -42,12 +42,12 @@
                 
         <?php $__currentLoopData = $reports; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$report): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><div class="col-lg-4 col-md-6 portfolio-item filter-app">
                     <div class="portfolio-wrap">
-                        <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
+                        <img src="<?php echo e('images/' . $report->photo); ?>" class="img-fluid"/>
                         <div class="portfolio-info">
                             <h4><?php echo e($report->full_name); ?></h4>
                             <p><?php echo e($report->accident); ?></p>
                             <div class="portfolio-links">
-                            <a href="assets/img/team/team-3.jpg" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a>
+                            <a href="<?php echo e('images/' . $report->photo); ?>" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a>
                             <a href="<?php echo e(route('report.show',$report->id)); ?>" title="More Details"><i class="bx bx-link"></i></a>
                             </div>
                             <?php if(Auth::user() == $report->user): ?>

@@ -221,14 +221,31 @@
                 <?php $__currentLoopData = $reports; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$report): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><div class="col-lg-4 col-md-6 portfolio-item filter-app">
                
                     <div class="portfolio-wrap">
-                        <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
+                        <img src="<?php echo e('images/' . $report->photo); ?>" class="img-fluid"/>
+                        
                         <div class="portfolio-info">
                             <h4><?php echo e($report->full_name); ?></h4>
                             <p><?php echo e($report->accident); ?></p>
                             <div class="portfolio-links">
-                            <a href="assets/img/team/team-4.jpg" data-gall="portfolioGallery" class="venobox" title="<?php echo e($report->full_name); ?>"><i class="bx bx-plus"></i></a>
+                            <a href="<?php echo e('images/' . $report->photo); ?>" data-gall="portfolioGallery" class="venobox" title="<?php echo e($report->full_name); ?>"><i class="bx bx-plus"></i></a>
                             <a href="<?php echo e(route('report.show',$report->id)); ?>" title="More Details"><i class="bx bx-link"></i></a>
                             </div>
+                            <?php if(Auth::user() == $report->user): ?>
+                                <a href="<?php echo e(route('reports.edit',$report->id)); ?>" class="btn btn-success"><i class="material-icons">Edit</i></a>
+                                <br/>
+
+                                <form id="delete-form-<?php echo e($report->id); ?>" action="<?php echo e(route('reports.destroy',$report->id)); ?>" style="display: none;" method="POST">
+                                    <?php echo csrf_field(); ?>
+                                    <?php echo method_field('DELETE'); ?>
+                                </form>
+
+                                <button type="button" class="btn btn-danger btn-sm" onclick="if(confirm('Are you sure? You want to delete this?')){
+                                    event.preventDefault();
+                                    document.getElementById('delete-form-<?php echo e($report->id); ?>').submit();
+                                }else {
+                                    event.preventDefault();
+                                        }"><i class="material-icons">delete</i></button>
+                            <?php endif; ?>
                         </div>
                         </div>
                     </div>
