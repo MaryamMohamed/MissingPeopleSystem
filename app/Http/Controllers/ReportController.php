@@ -101,14 +101,15 @@ class ReportController extends Controller
             $destinationPath = 'images/'; // upload path
             $reportImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
             $files->move($destinationPath, $reportImage);
+            $report ->photo = $reportImage;
         }
-        $report ->photo = $reportImage;
+        
 
         if ($request->user()->report()->save($report)){
             $message = "Your Report Has Been Sent SUCCESSFULLY";
         }
 
-        return redirect()->route('reports.missed.index')->with(['message' => $message]);  
+        return redirect()->route('reports.founded.index')->with(['message' => $message]);  
     }
 
     public function createNewF()
@@ -157,8 +158,9 @@ class ReportController extends Controller
             $destinationPath = 'images/'; // upload path
             $reportImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
             $files->move($destinationPath, $reportImage);
+            $report ->photo = $reportImage;
         }
-        $report ->photo = $reportImage;
+        
 
         if ($request->user()->report()->save($report)){
             $message = "Your Report Has Been Sent SUCCESSFULLY";
@@ -175,17 +177,23 @@ class ReportController extends Controller
     public function showSimilar(Request $request)
     {
         # code...
+        $report_state = $request['report_state'];
         $name = $request['full_name'];
         $gander = $request['gander'];        
         $age = $request['age'];
         
-        $reports = Report::sortable()->where('full_name', 'like', $name)
-                        -> where('age', 'like', $age)
-                        -> where('gander', 'like', $gander)->paginate(9);
+        $reports = Report::sortable()->where('gander', 'like', $gander)
+                        -> orWhere('age', 'like', $age)
+                        -> orWhere('full_name', 'like', $name)->paginate(9);
 
         if ($reports->isEmpty()){
-            return $this->store($request);
-            
+            if($report_state=="FOUNDED"){
+                return $this->store($request);
+            }
+            else{
+                return $this->storeMissed($request);
+            }
+             
         }
         else{
             return view('reports.results', compact('reports') );
