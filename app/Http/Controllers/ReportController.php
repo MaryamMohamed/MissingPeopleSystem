@@ -178,13 +178,86 @@ class ReportController extends Controller
     {
         # code...
         $report_state = $request['report_state'];
-        $name = $request['full_name'];
-        $gander = $request['gander'];        
-        $age = $request['age'];
-        
-        $reports = Report::sortable()->where('gander', 'like', $gander)
+        $gander = $request['gander'];
+        //////////////////// personal data //30
+        $name = $request['full_name'];//10
+        $father_name = $request['father_name'];//5
+        $mother_name = $request['mother_name'];//5
+        $age = $request['age'];//10
+        ////////////////////character data //20
+        $body_color = $request['body_color'];//5
+        $eye_color = $request['eye_color'];//5
+        $hair_color = $request['hair_color'];//5
+        $length = $request['length'];//5
+        ////////////////////accident data //50
+        $date_of_found = $request['date_of_found'];//25
+        $country = $request['country'];//15
+        $street = $request['street'];//10
+
+        $reports = Report::sortable()->where('full_name', 'like', $name)
+                        -> orWhere('father_name', 'like', $father_name)
+                        -> orWhere('mother_name', 'like', $mother_name)
                         -> orWhere('age', 'like', $age)
-                        -> orWhere('full_name', 'like', $name)->paginate(9);
+                        -> orWhere('body_color', 'like', $body_color)
+                        -> orWhere('eye_color', 'like', $eye_color)
+                        -> orWhere('hair_color', 'like', $hair_color)
+                        -> orWhere('length', 'like', $length)
+                        -> orWhere('date_of_found', 'like', $date_of_found)
+                        -> orWhere('country', 'like', $country)
+                        -> orWhere('street', 'like', $street)->paginate(9);
+
+        foreach ($reports as $key=>$report) {
+            # code...
+            $report->score = 0;
+            if ($report->full_name == $name) {
+                # code...
+                $report->score = $report->score + 10;
+            }
+            if ($report->father_name == $father_name) {
+                # code...
+                $report->score = $report->score + 5;
+            }
+            if ($report->mother_name == $mother_name) {
+                # code...
+                $report->score = $report->score + 5;
+            }
+            if ($report->age == $age) {
+                # code...
+                $report->score = $report->score + 10;
+            }
+            if ($report->body_color == $body_color) {
+                # code...
+                $report->score = $report->score + 5;
+            }
+            if ($report->eye_color == $eye_color) {
+                # code...
+                $report->score = $report->score + 5;
+            }
+            if ($report->hair_color == $hair_color) {
+                # code...
+                $report->score = $report->score + 5;
+            }
+            if ($report->length == $length) {
+                # code...
+                $report->score = $report->score + 5;
+            }
+            if ($report->date_of_found == $date_of_found) {
+                # code...
+                $report->score = $report->score + 25;
+            }
+            if ($report->country == $country) {
+                # code...
+                $report->score = $report->score + 15;
+            }
+            if ($report->street == $street) {
+                # code...
+                $report->score = $report->score + 5;
+            }
+            $request->user()->report()->save($report);
+        }
+        $reports = Report::sortable(['score' => 'desc'])->where('score', '>=', 50)
+                        ->where('gander', 'like', $gander)
+                        ->paginate(9);
 
         if ($reports->isEmpty()){
             if($report_state=="FOUNDED"){
@@ -193,7 +266,6 @@ class ReportController extends Controller
             else{
                 return $this->storeMissed($request);
             }
-             
         }
         else{
             return view('reports.results', compact('reports') );

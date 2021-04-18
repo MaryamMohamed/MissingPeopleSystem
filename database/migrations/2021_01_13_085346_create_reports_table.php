@@ -35,6 +35,7 @@ class CreateReportsTable extends Migration
             $table->string('accident')->nullable();
             $table->string('photo')->nullable();
 
+            $table->decimal('score')->nullable();
             $table->string('report_state')->nullable(); //missed or founded
             $table->string('accident_state')->nullable(); //founded or not founded
             
