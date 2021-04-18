@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/people-found-search','ReportController@search');
     Route::get('/missing-persons-search','ReportController@searchMissed');
     Route::get('/{id}-show','ReportController@show')->name('report.show');
-    //Route::get('/results','ReportController@showSimilar')->name('report.results');    
+    Route::get('/results','ReportController@showSimilar')->name('report.results');    
 });
 
 

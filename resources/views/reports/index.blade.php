@@ -51,6 +51,7 @@
           <li><strong>City</strong>: {{  $report->country }}</li>
           <li><strong>Street</strong>: {{  $report->street }}</li>
           <li><strong>Accident Details</strong>: {{  $report->accident }}</li>
+          <li><strong>Current Place</strong>: {{  $report->current_place }}</li>
         </div>
 
         <div class="portfolio-description">

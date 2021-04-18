@@ -270,6 +270,14 @@
                     </div>
 
                     <div class="form-group row">
+                        <label for="current_place" class="col-md-4 col-form-label text-md-right">{{ __('Current Place') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="current_place" type="text" class="form-control" value="{{  $report->current_place }}" name="current_place" required></input>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <input name="report_state" value="MISSED" type="hidden">                           
                     </div>
 

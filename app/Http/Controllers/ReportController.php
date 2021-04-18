@@ -152,6 +152,7 @@ class ReportController extends Controller
         $report ->date_of_found = $request['date_of_found'];
         $report ->country = $request['country'];
         $report ->street = $request['street'];
+        $report ->current_place = $request['current_place'];
         $report ->accident = $request['accident'];
         $report ->report_state = $request['report_state'];
         if ($files = $request->file('photo')) {
@@ -253,8 +254,9 @@ class ReportController extends Controller
                 # code...
                 $report->score = $report->score + 5;
             }
-            $request->user()->report()->save($report);
+            $report->save();
         }
+
         $reports = Report::sortable(['score' => 'desc'])->where('score', '>=', 50)
                         ->where('gander', 'like', $gander)
                         ->paginate(9);

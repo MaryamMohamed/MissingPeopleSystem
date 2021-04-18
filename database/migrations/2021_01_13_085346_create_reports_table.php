@@ -32,6 +32,7 @@ class CreateReportsTable extends Migration
  
             $table->string('country')->nullable();
             $table->string('street')->nullable();
+            $table->string('current_place')->nullable();
             $table->string('accident')->nullable();
             $table->string('photo')->nullable();
 

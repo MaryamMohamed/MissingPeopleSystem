@@ -13,11 +13,8 @@
         <div class="row" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-12 d-flex justify-content-center">
             <ul id="portfolio-flters">
-                <h4> Sort By </h4>
-                <li data-filter="*">@sortablelink('full_name')</li>
-                <li data-filter="*">@sortablelink('age')</li>
-                <li data-filter="*">@sortablelink('gander')</li>
-                <li data-filter="*">@sortablelink('date_of_found')</li>
+                
+                
                  
             </ul>
           </div>
