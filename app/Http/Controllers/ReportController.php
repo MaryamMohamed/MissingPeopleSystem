@@ -100,20 +100,22 @@ class ReportController extends Controller
         $report ->accident = $request['accident'];
         $report ->report_state = $request['report_state'];
         
-//if you want to store report not create new you should hash next if statement =====> BUG
-        if ($files = $request->file('photo')) {
-            $destinationPath = 'images/'; // upload path
-            $reportImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
-            $files->move($destinationPath, $reportImage);
-            $report ->photo = $reportImage;
+        //if you want to create new report
+        if ($reportImage == ' ') {
+            # code...
+            if ($files = $request->file('photo')) {
+                $destinationPath = 'images/'; // upload path
+                $reportImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
+                $files->move($destinationPath, $reportImage);
+                $report ->photo = $reportImage;
+            }
         }
-        
-
+        //if you want to store report
         else{
             File::move(public_path('oneImage/'.$reportImage), public_path('images/'.$reportImage));
             $report ->photo = $reportImage;
         }
-        
+        //save report data to database
         if ($request->user()->report()->save($report)){
             
             $message = "Your Report Has Been Sent SUCCESSFULLY";
@@ -134,7 +136,7 @@ class ReportController extends Controller
         return view('reports.missed.createNew');
     }
 
-    public function storeMissed(Request $request, $reportImage)
+    public function storeMissed(Request $request, $reportImage = ' ')
     {
         //
         $this -> validate($request, [
@@ -166,19 +168,21 @@ class ReportController extends Controller
         $report ->accident = $request['accident'];
         $report ->report_state = $request['report_state'];
 
-        /*if ($files = $request->file('photo')) {
-            $destinationPath = 'images/'; // upload path
-            $reportImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
-            $files->move($destinationPath, $reportImage);
-            $report ->photo = $reportImage;
+        //if you want to create new report
+        if ($reportImage == ' ') {
+            if ($files = $request->file('photo')) {
+                $destinationPath = 'images/'; // upload path
+                $reportImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
+                $files->move($destinationPath, $reportImage);
+                $report ->photo = $reportImage;
+            }
         }
-        else{*/
+        //if you want to store report
+        else{
             File::move(public_path('oneImage/'.$reportImage), public_path('images/'.$reportImage));
             $report ->photo = $reportImage;
-        //}
-        
-
-        File::move(public_path('oneImage/'.$reportImage), public_path('images/'.$reportImage));
+        }
+        //save report data to database
         if ($request->user()->report()->save($report)){
             $message = "Your Report Has Been Sent SUCCESSFULLY";
         }
@@ -220,6 +224,7 @@ class ReportController extends Controller
 
         $output = null;
         exec('script', $output);
+        #print_r($output);
         if($output){
             $photo = $output[0];
             $photos = Report::sortable()->where('photo', 'like', $photo)->paginate(9);

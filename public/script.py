@@ -19,6 +19,7 @@ def read_img(path):
 
 known_encodings = []
 known_names = []
+
 known_dir = "E:\\college\\level.4\\GP\\GraduationProjectV1.1\\MissingPeopleSystem\\public\\images"
 for file in os.listdir(known_dir):
     #print(file)
@@ -33,7 +34,6 @@ for name in known_names:
     photos.append(name)
 
 unknown_dir = "E:\\college\\level.4\\GP\\GraduationProjectV1.1\\MissingPeopleSystem\\public\\oneImage"
-
 for file in os.listdir(unknown_dir):
     #print("Processing", file)
     img = read_img(unknown_dir + '/' + file)
@@ -73,4 +73,5 @@ else:
 #open and read the file after the appending:
 f = open("result.txt", "r")
 print(f.read())
+
 # %%
