@@ -169,6 +169,7 @@ return [
          */
 
         Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
+        Spatie\Backup\BackupServiceProvider::class,
         
         /*
          * Application Service Providers...

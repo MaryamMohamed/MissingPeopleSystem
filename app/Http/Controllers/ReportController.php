@@ -6,6 +6,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use File;
+
 
 class ReportController extends Controller
 {
@@ -66,7 +69,7 @@ class ReportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $reportImage = ' ')
     {
         //
         $this -> validate($request, [
@@ -76,7 +79,7 @@ class ReportController extends Controller
             'street' => 'required',
             'accident' => 'required|min:50',
             'report_state' => 'required',
-            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            //'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]
         );
         
@@ -96,7 +99,8 @@ class ReportController extends Controller
         $report ->street = $request['street'];
         $report ->accident = $request['accident'];
         $report ->report_state = $request['report_state'];
-
+        
+//if you want to store report not create new you should hash next if statement =====> BUG
         if ($files = $request->file('photo')) {
             $destinationPath = 'images/'; // upload path
             $reportImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
@@ -105,7 +109,13 @@ class ReportController extends Controller
         }
         
 
+        else{
+            File::move(public_path('oneImage/'.$reportImage), public_path('images/'.$reportImage));
+            $report ->photo = $reportImage;
+        }
+        
         if ($request->user()->report()->save($report)){
+            
             $message = "Your Report Has Been Sent SUCCESSFULLY";
         }
 
@@ -124,7 +134,7 @@ class ReportController extends Controller
         return view('reports.missed.createNew');
     }
 
-    public function storeMissed(Request $request)
+    public function storeMissed(Request $request, $reportImage)
     {
         //
         $this -> validate($request, [
@@ -134,7 +144,7 @@ class ReportController extends Controller
             'street' => 'required',
             'accident' => 'required|min:50',
             'report_state' => 'required',
-            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            //'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]
         );
  
@@ -155,14 +165,20 @@ class ReportController extends Controller
         $report ->current_place = $request['current_place'];
         $report ->accident = $request['accident'];
         $report ->report_state = $request['report_state'];
-        if ($files = $request->file('photo')) {
+
+        /*if ($files = $request->file('photo')) {
             $destinationPath = 'images/'; // upload path
             $reportImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
             $files->move($destinationPath, $reportImage);
             $report ->photo = $reportImage;
         }
+        else{*/
+            File::move(public_path('oneImage/'.$reportImage), public_path('images/'.$reportImage));
+            $report ->photo = $reportImage;
+        //}
         
 
+        File::move(public_path('oneImage/'.$reportImage), public_path('images/'.$reportImage));
         if ($request->user()->report()->save($report)){
             $message = "Your Report Has Been Sent SUCCESSFULLY";
         }
@@ -177,7 +193,7 @@ class ReportController extends Controller
      */
     public function showSimilar(Request $request)
     {
-        # code...
+        # code that give each request variable...
         $report_state = $request['report_state'];
         $gander = $request['gander'];
         //////////////////// personal data //30
@@ -195,6 +211,27 @@ class ReportController extends Controller
         $country = $request['country'];//15
         $street = $request['street'];//10
 
+        # give the image name and put it on oneimage folder
+        if ($files = $request->file('photo')) {
+            $destinationPath = 'oneImage/'; // upload path
+            $reportImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
+            $files->move($destinationPath, $reportImage);
+        }
+
+        $output = null;
+        exec('script', $output);
+        if($output){
+            $photo = $output[0];
+            $photos = Report::sortable()->where('photo', 'like', $photo)->paginate(9);
+        }
+        else{
+            $photos = Report::sortable()->where('full_name', 'like', ' ')->paginate(9);
+        }
+        
+        
+        //echo($im);
+        
+        #check if there is previous reports with same data
         $reports = Report::sortable()->where('full_name', 'like', $name)
                         -> orWhere('father_name', 'like', $father_name)
                         -> orWhere('mother_name', 'like', $mother_name)
@@ -207,6 +244,8 @@ class ReportController extends Controller
                         -> orWhere('country', 'like', $country)
                         -> orWhere('street', 'like', $street)->paginate(9);
 
+
+        #give score to each report
         foreach ($reports as $key=>$report) {
             # code...
             $report->score = 0;
@@ -256,21 +295,26 @@ class ReportController extends Controller
             }
             $report->save();
         }
+        
 
+        # display reports with score greateer than 50 only
         $reports = Report::sortable(['score' => 'desc'])->where('score', '>=', 50)
                         ->where('gander', 'like', $gander)
                         ->paginate(9);
-
-        if ($reports->isEmpty()){
+        
+        # if there are no similar reports save new report to satabase
+        if ($reports->isEmpty() && $photos->isEmpty()){
             if($report_state=="FOUNDED"){
-                return $this->store($request);
+                return $this->store($request, $reportImage);
             }
             else{
-                return $this->storeMissed($request);
+                return $this->storeMissed($request, $reportImage);
             }
         }
+        
+        #if there are similar reports show it
         else{
-            return view('reports.results', compact('reports') );
+            return view('reports.results', compact('reports', 'photos') );
         }
     }
     /**

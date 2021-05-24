@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '4eebfa34b20ed64b271781a4ddd0ed6576b372aa',
+    'reference' => '4d81621a5ce4be25d04d8fa7329b6fa12b43c9f3',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -187,6 +187,15 @@
       ),
       'reference' => '307fb34a5ab697461ec4c9db865b20ff2fd40771',
     ),
+    'firebase/php-jwt' => 
+    array (
+      'pretty_version' => 'v5.2.1',
+      'version' => '5.2.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'f42c9110abe98dd6cfe9053c49bc86acc70b2d23',
+    ),
     'fruitcake/laravel-cors' => 
     array (
       'pretty_version' => 'v2.0.3',
@@ -195,6 +204,33 @@
       array (
       ),
       'reference' => '01de0fe5f71c70d1930ee9a80385f9cc28e0f63a',
+    ),
+    'google/apiclient' => 
+    array (
+      'pretty_version' => 'v2.9.1',
+      'version' => '2.9.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '2fb6e702aca5d68203fa737f89f6f774022494c6',
+    ),
+    'google/apiclient-services' => 
+    array (
+      'pretty_version' => 'v0.170.0',
+      'version' => '0.170.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'b45ddc3d82b2c8f328d869d55db88c1885d898ee',
+    ),
+    'google/auth' => 
+    array (
+      'pretty_version' => 'v1.15.1',
+      'version' => '1.15.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '4e0c9367719df9703e96f5ad613041b87742471c',
     ),
     'graham-campbell/result-type' => 
     array (
@@ -499,7 +535,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '4eebfa34b20ed64b271781a4ddd0ed6576b372aa',
+      'reference' => '4d81621a5ce4be25d04d8fa7329b6fa12b43c9f3',
     ),
     'laravel/tinker' => 
     array (
@@ -536,6 +572,15 @@
       array (
       ),
       'reference' => '9be3b16c877d477357c015cec057548cf9b2a14a',
+    ),
+    'league/flysystem-cached-adapter' => 
+    array (
+      'pretty_version' => '1.1.0',
+      'version' => '1.1.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'd1925efb2207ac4be3ad0c40b8277175f99ffaff',
     ),
     'league/mime-type-detection' => 
     array (
@@ -584,6 +629,24 @@
         0 => '1.10.2',
       ),
     ),
+    'nao-pon/flysystem-cached-extra' => 
+    array (
+      'pretty_version' => '1.0.3',
+      'version' => '1.0.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '189abdafa0a86d92781e148ee8740ef80f4c5859',
+    ),
+    'nao-pon/flysystem-google-drive' => 
+    array (
+      'pretty_version' => '1.1.13',
+      'version' => '1.1.13.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'bb812339ecf06540ed096f71403f10fcbcc590f3',
+    ),
     'nesbot/carbon' => 
     array (
       'pretty_version' => '2.41.5',
@@ -626,6 +689,24 @@
       array (
       ),
       'reference' => '943b5d70cc5ae7483f6aff6ff43d7e34592ca0f5',
+    ),
+    'paragonie/constant_time_encoding' => 
+    array (
+      'pretty_version' => 'v2.4.0',
+      'version' => '2.4.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'f34c2b11eb9d2c9318e13540a1dbc2a3afbd939c',
+    ),
+    'paragonie/random_compat' => 
+    array (
+      'pretty_version' => 'v9.99.100',
+      'version' => '9.99.100.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '996434e5492cb4c3edcb9168db6fbb1359ef965a',
     ),
     'phar-io/manifest' => 
     array (
@@ -680,6 +761,15 @@
       array (
       ),
       'reference' => '994ecccd8f3283ecf5ac33254543eb0ac946d525',
+    ),
+    'phpseclib/phpseclib' => 
+    array (
+      'pretty_version' => '3.0.8',
+      'version' => '3.0.8.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'd9615a6fb970d9933866ca8b4036ec3407b020b6',
     ),
     'phpspec/prophecy' => 
     array (
@@ -743,6 +833,15 @@
       array (
       ),
       'reference' => '9fa359ff5ddaa5eb2be2bedb08a6a5787a5807ab',
+    ),
+    'psr/cache' => 
+    array (
+      'pretty_version' => '1.0.1',
+      'version' => '1.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'd11b50ad223250cf17b86e38383413f5a6764bf8',
     ),
     'psr/container' => 
     array (
@@ -1020,6 +1119,33 @@
       array (
       ),
       'reference' => 'c6c1022351a901512170118436c764e473f6de8c',
+    ),
+    'spatie/db-dumper' => 
+    array (
+      'pretty_version' => '2.21.1',
+      'version' => '2.21.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '05e5955fb882008a8947c5a45146d86cfafa10d1',
+    ),
+    'spatie/laravel-backup' => 
+    array (
+      'pretty_version' => '6.16.0',
+      'version' => '6.16.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '6b2229a07d92c2bb146ad9c5223fc32e9d74830c',
+    ),
+    'spatie/temporary-directory' => 
+    array (
+      'pretty_version' => '1.3.0',
+      'version' => '1.3.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'f517729b3793bca58f847c5fd383ec16f03ffec6',
     ),
     'swiftmailer/swiftmailer' => 
     array (
