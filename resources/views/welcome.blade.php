@@ -41,7 +41,7 @@
   <section id="hero">
     <div class="hero-container">
       <!-- <a href="index.html" class="hero-logo" data-aos="zoom-in"><img src="assets/img/hero-logo.png" alt=""></a> -->
-      <h1 data-aos="zoom-in">Welcome To Missing People System</h1>
+      <h1 data-aos="zoom-in">Welcome To Last Seen System</h1>
       <a data-aos="fade-up" href="#about" class="btn-get-started scrollto">Get Started</a>
     </div>
   </section><!-- End Hero -->
@@ -219,10 +219,10 @@
                 
                 @foreach($reports as $key=>$report)<div class="col-lg-4 col-md-6 portfolio-item filter-app">
                
-                    <div class="portfolio-wrap">
-                        <img src="{{ 'images/' . $report->photo }}" class="img-fluid"/>
+                    <div class=" card">
+                        <img src="{{ 'images/' . $report->photo }}" class=" card-img-top"/>
                         
-                        <div class="portfolio-info">
+                        <div class="card-body">
                             <h4>{{ $report->full_name }}</h4>
                             <p>{{ $report->accident }}</p>
                             <div class="portfolio-links">
